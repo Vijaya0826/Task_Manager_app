@@ -1,0 +1,37 @@
+<div class="main-container">
+  <div class="container">
+      <img class="logo" src="https://tse3.mm.bing.net/th?id=OIP.dLKuXy7237j0ZMI20mn89wHaHX&pid=Api&P=0&h=180" alt="DayTask Logo" />
+      <h2 class="heading">Task Manager</h2>
+    
+      <!-- Search Bar -->
+      <input type="text" [(ngModel)]="searchQuery" placeholder="Search tasks..." class="search-bar" />
+    
+      <div class="task-input">
+        <input #taskInput type="text" placeholder="Enter new task..." />
+        <button (click)="addTask(taskInput.value); taskInput.value=''">Add Task</button>
+      </div>
+    
+      <h3 class="heading">Tasks Queue</h3>
+      <div class="task-list">
+        <div *ngFor="let task of filteredTasks()" class="task-card">
+          <span [class.completed]="task.completed">{{ task.text }}</span>
+          <div class="task-actions">
+            <button (click)="editTask(task)">✏️</button>
+            <button (click)="markComplete(task)">✅</button>
+            <button (click)="deleteTask(task.id)">🗑️</button>
+          </div>
+        </div>
+      </div>
+    
+      <h3 class="heading">Completed Tasks</h3>
+      <div class="completed-tasks">
+          <div *ngIf="allTasksIncomplete()">
+              All tasks are incomplete!
+          </div>
+          <div *ngFor="let task of getCompletedTasks()">
+            <p>{{ task.text }}</p>
+          </div>
+      </div>
+  </div>
+</div>
+  
